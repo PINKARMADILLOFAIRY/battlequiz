@@ -105,6 +105,3 @@ dist
 
 # MongoDB URI
 mongoURI.js
-
-# package-lock.js
-package-lock.json
