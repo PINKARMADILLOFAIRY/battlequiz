@@ -15,6 +15,10 @@ router.get('/:id',
 
 // POST request for saving/suspending a game
 router.post('/', 
+    (req, res, next) => {
+        console.log('entered router.post');
+        next();
+    },
     gamesController.createGame,
     (req, res) => {
         res.status(200).json({});

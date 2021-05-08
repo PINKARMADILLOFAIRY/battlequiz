@@ -1,11 +1,13 @@
 // this file contains middleware for CRUD functionality on game state
 
-const { Game } = require('../models/Games'); // ! make sure this path is correct
+// const { Game } = require('../models/Games'); // ! make sure this path is correct
 
 const gamesController = {};
 
 gamesController.createGame = (req, res, next) => {
-    Game.create(req.params.id) 
+    // entered createGame
+    console.log('entered createGame with body: ', req.body);
+    Game.create(req.body) 
         .then(queryResponse => {
             res.locals.games = queryResponse;
             return next();
@@ -52,4 +54,4 @@ gamesController.deleteGame = (req, res, next) => {
         })
 };
 
-export default gamesController;
+module.exports = gamesController;
