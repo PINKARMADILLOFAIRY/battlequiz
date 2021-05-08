@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use('/build', express.static(path.join(__dirname, '../build/bundle.js')));
 
-app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client/public/index.html')));
+app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../index.html')));
 
 app.use((req, res) => res.status(404).send('I don\'t know, man. I got nothing.'));
 
