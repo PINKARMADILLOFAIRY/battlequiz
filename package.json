@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/PINKARMADILLOFAIRY/battlequiz/issues"
   },
-  "homepage": "https://github.com/PINKARMADILLOFAIRY/battlequiz#readme"
+  "homepage": "https://github.com/PINKARMADILLOFAIRY/battlequiz#readme",
+  "dependencies": {
+    "webpack": "^5.36.2"
+  }
 }
