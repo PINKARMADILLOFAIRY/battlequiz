@@ -25,7 +25,7 @@ module.exports = {
         port: 8080,
         publicPath: '/build',
         proxy: {
-            '/api/**': 'http://localhost:3000',
+            '/games/**': 'http://localhost:3000',
         },
         hot: true,
     }
