@@ -11,7 +11,7 @@ mongoose.connect(mongoURI.mongoURI, { useNewUrlParser: true, useUnifiedTopology:
 app.use(express.json());
 app.use(cors()); 
 
-app.use('/build', express.static(path.join(__dirname, '../build')));
+app.use('/build', express.static(path.join(__dirname, '../build/bundle.js')));
 
 app.get('/', (req, res) => {
     return res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'));
