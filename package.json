@@ -1,0 +1,19 @@
+{
+  "name": "battlequiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PINKARMADILLOFAIRY/battlequiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PINKARMADILLOFAIRY/battlequiz/issues"
+  },
+  "homepage": "https://github.com/PINKARMADILLOFAIRY/battlequiz#readme"
+}
