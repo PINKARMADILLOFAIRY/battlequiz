@@ -1,16 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose'); 
-const uri = require('../mongoURI');
+const mongoURI = require('../mongoURI');
 const path = require('path'); 
+const cors = require('cors'); 
 
 
 const app = express(); 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoURI.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.json());
 app.use(cors()); 
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
+
+app.get('/', (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'));
+})
 
 app.use((req, res) => res.status(404).send('I don\'t know, man. I got nothing.'));
 
