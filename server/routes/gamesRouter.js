@@ -8,20 +8,16 @@ const router = express.Router();
 router.get('/:id', 
     gamesController.findGame,
     (req, res) => {
-        res.status(200).json({});
+        res.status(200).json(res.locals.games);
     }
 );
 
 
 // POST request for saving/suspending a game
 router.post('/', 
-    (req, res, next) => {
-        console.log('entered router.post');
-        next();
-    },
     gamesController.createGame,
     (req, res) => {
-        res.status(200).json({});
+        res.status(200).json(res.locals.games);
     }
 );
 
@@ -29,7 +25,7 @@ router.post('/',
 router.put('/:id', 
     gamesController.updateGame,
     (req, res) => {
-        res.status(200).json({});
+        res.status(200).json(res.locals.games);
     }
 );
 
@@ -37,7 +33,7 @@ router.put('/:id',
 router.delete('/:id', 
     gamesController.deleteGame,
     (req, res) => {
-        res.status(200).json({});
+        res.status(200).json(res.locals.games);
     }
 );
 

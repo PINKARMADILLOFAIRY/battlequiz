@@ -1,25 +1,28 @@
 // this file contains middleware for CRUD functionality on game state
 
-// const { Game } = require('../models/Games'); // ! make sure this path is correct
+const { Game } = require('../models/gameModel'); // make sure this path is correct
 
 const gamesController = {};
 
 gamesController.createGame = (req, res, next) => {
-    // entered createGame
-    console.log('entered createGame with body: ', req.body);
+    // NOTE: createGame expects req.body to BE the game object we are saving
     Game.create(req.body) 
         .then(queryResponse => {
+            // we will return the game object model that we created for confirmation
             res.locals.games = queryResponse;
             return next();
         })
         .catch((err) => {
             console.log(err);
-            return next({log: 'express error handler caught at createGame'});
+            return next({log: 'express error handler caught at createGame', message: err});
         })
 };
 
 gamesController.findGame = (req, res, next) => {
-    Game.findOne(req.params.id)
+    // expects :id/<mongoIDnumber> in the route
+    // TODO we could potentially allow players to "name" their game or identify them by something else, like date created
+    const queryFilter = {_id: req.params.id}
+    Game.findOne(queryFilter)
         .then(queryResponse => {
             res.locals.games = queryResponse;
             return next();
@@ -31,8 +34,9 @@ gamesController.findGame = (req, res, next) => {
 };
 
 gamesController.updateGame = (req, res, next) => {
-    Game.findOneAndUpdate({id: req.params.id}) // ! check on this one
+    Game.findOneAndUpdate({_id: req.params.id}, req.body, {returnOriginal: false}) // ! check on this one
         .then(queryResponse => {
+            // should return NEW updated game object to confirm
             res.locals.games = queryResponse;
             return next(); 
         })
@@ -43,7 +47,7 @@ gamesController.updateGame = (req, res, next) => {
 };
 
 gamesController.deleteGame = (req, res, next) => {
-    Game.findOneAndDelete({id: req.params.id})
+    Game.findOneAndDelete({_id: req.params.id})
         .then(queryResponse => {
             res.locals.games = queryResponse;
             return next();
