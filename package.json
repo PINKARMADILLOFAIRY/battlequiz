@@ -1,0 +1,27 @@
+{
+  "name": "battlequiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PINKARMADILLOFAIRY/battlequiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PINKARMADILLOFAIRY/battlequiz/issues"
+  },
+  "homepage": "https://github.com/PINKARMADILLOFAIRY/battlequiz#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "webpack": "^5.36.2"
+  }
+}
