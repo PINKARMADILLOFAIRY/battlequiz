@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-
+import Quiz from './Quiz.jsx'
 export default function App() {
+
   return(
     <div className="App">
-      Hello World!
+      <Quiz/>
       {/* <Quiz />
       <Game /> */}
     </div>)
