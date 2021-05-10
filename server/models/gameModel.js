@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-
 const playerSchema = new mongoose.Schema({
-  playerName: String
+  playerName: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
 });
+
 const Player = mongoose.model('player', playerSchema)
 
 const gameSchema = new mongoose.Schema({
