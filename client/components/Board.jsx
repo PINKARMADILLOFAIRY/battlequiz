@@ -15,10 +15,26 @@ export default function Board(props) {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, 'ship2', 'ship2', 'ship2', null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ],
   );
+
+  const playerTwoGo = () => {
+    let square = Math.floor(Math.random() * 99).toString()
+    if (square < 10 ) {
+      square = "0".concat(square)
+    }
+    console.log(square)
+    console.log(playerOneBoard[square[0]][square[1]])
+    if (playerOneBoard[square[0]][square[1]] === null) {
+    setPlayerOneBoard(arr => [...arr, arr[square[0]][square[1]] = 'miss'])
+  }
+    else if (playerOneBoard[square[0]][square[1]].slice(0,4) === 'ship') {
+    setPlayerOneBoard(arr => [...arr, arr[square[0]][square[1]] = 'hit'])
+  }
+  else playerTwoGo();
+  }
 
   const initialShips = [];
   for(let i = 1; i < 6; i++ ) {
@@ -54,15 +70,15 @@ export default function Board(props) {
   const [playerTwoBoard, setPlayerTwoBoard] = useState(
     [
       ['ship1', null, null, null, null, null, null, null, null, null],
-      ['ship1', null, null, null, null, null, null, null, null, null],
+      ['ship1', null, null, null, 'ship5', 'ship5', 'ship5', 'ship5', 'ship5', 'ship5'],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, 'ship2', 'ship2', 'ship2', null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, 'ship4', null],
+      [null, null, null, null, null, null, null, null, 'ship4', null],
+      [null, null, null, null, null, null, null, null, 'ship4', null],
+      [null, 'ship3', 'ship3', 'ship3', 'ship3', null, null, null, 'ship4', null],
+      [null, null, null, null, null, null, null, null, 'ship4', null],
     ],
   );
 
@@ -73,16 +89,14 @@ export default function Board(props) {
   const handleUpdateBoardTwo = (e) => {
     let x = e.target.id.slice(-2)[0]
     let y = e.target.id.slice(-1)[0]
-    if(props.turn === 0) return alert('You need to correclty answer a question to have a turn!')
+    if(props.turn === 0) return alert('You need to correctly answer a question to have a turn!')
+    props.decrementTurns()
     if (playerTwoBoard[x][y] === null) {
-      props.decrementTurns()
-      return setPlayerTwoBoard(arr => [...arr, arr[x][y] = 'miss'])
+      setPlayerTwoBoard(arr => [...arr, arr[x][y] = 'miss'])
+    }else if (playerTwoBoard[x][y].slice(0,4) === 'ship' ) {
+      setPlayerTwoBoard(arr => [...arr, arr[x][y] = 'hit'])
     }
-    // console.log(playerTwoBoard[x][y].slice(0,4)[0])
-    if (playerTwoBoard[x][y].slice(0,4) === 'ship' ) {
-        props.decrementTurns()
-      return setPlayerTwoBoard(arr => [...arr, arr[x][y] = 'hit'])
-    }
+    playerTwoGo();
   }
 
   const [shipOneLength, setLength] = useState(2);
@@ -105,15 +119,20 @@ export default function Board(props) {
   return (
     <div className="game">
     <div className="playerTwoBoard">
+      <h1>Ships Destroyed = <span>{playerTwoShipsRemaining}</span></h1>
       {boardTwo}
     <br/>
     </div>
-    <div className="playerOneBoard">
+    <div id="playerOneBoard" className="playerOneBoard">
+      <h1>Ships Remaining = <span>{playerTwoShipsRemaining}</span></h1>
       {boardOne}
     </div>
+    <br/>
+      <h2>Available Ships</h2>
+    <div className="playerShips" style={{display:'flex'}}>
     {playerOneShips}
+    </div>
     <div className='score'>
-      <h1>Ships Remaining = <span>{playerTwoShipsRemaining}</span></h1>
     </div>
     </div>
   );

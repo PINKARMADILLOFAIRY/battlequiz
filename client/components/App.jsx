@@ -1,7 +1,6 @@
-import React, {Component, useState, useEffect }  from 'react';
-// import Game from './Game';
-import Quiz from './Quiz.jsx'
+import React, { useState } from 'react';
 import Board from './Board.jsx'
+import Quiz from './Quiz.jsx';
 
 
 export default function App() {
