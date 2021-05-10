@@ -21,7 +21,6 @@ sessionController.setCookie = (req, res, next) => {
     const signature = JWT.sign(payload, process.env.JWT_SECRET, {expiresIn: 1000 * 60 * 60});
     console.log('jwt signature: ', signature);
     res.cookie('battlequiz', signature, {httpOnly: true});
-    console.log('res.cookies', res.cookies);
     next();
 }
 

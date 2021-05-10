@@ -31,12 +31,13 @@ playerController.createPlayer = (req, res, next) => {
 
 // GET requests check for the existence of a player by playerName and then verify the password using bcrypt
 playerController.verifyPlayer = (req, res, next) => {
-    const playerToVerify = req.body;
+    const playerToVerify = {playerName: 'username', password: 'password'};
+    console.log(playerToVerify);
     // missing password or playerName
-    if (!playerToVerify.password || !playerToVerify.playerName) {
-        console.log('missing required information');
-        return next({message: 'missing required information'})
-    }
+    // if (!playerToVerify.password || !playerToVerify.playerName) {
+    //     console.log('missing required information');
+    //     return next({message: 'missing required information'})
+    // }
     Player.findOne({playerName: playerToVerify.playerName}, (err, returnedPlayer) => {
         if (err) return next(err);
         if (!returnedPlayer) return next({message: 'player does not exist'});

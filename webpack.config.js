@@ -28,6 +28,7 @@ module.exports = {
     },
     devServer: {
         port: 8080,
+        historyApiFallback: true,
         publicPath: '/build',
         proxy: {
             '/games/**': 'http://localhost:3000',
