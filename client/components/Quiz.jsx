@@ -1,7 +1,7 @@
 import React, {Component, useState, useEffect }  from 'react';
 import Paper from '@material-ui/core/Paper';
+import questions from '../assets/quizQuestions'
 import Timer from './Timer'
-const questions = require('../assets/quizQuestions');
 
 
 //"Fisher-Yates Shuffle" Algorithm to randomize question order.
@@ -15,20 +15,22 @@ const shuffleArray = (array) =>{
   return array;
 }
 
+
 class Quiz extends Component{
 
-  constructor(props) {
+    constructor(props) {
     super(props);
     this.state = {
       quizQuestions:shuffleArray(questions),
       questionNumber: 0,
-      correctAnswers:0,
       incorrectAnswers:0,
+      correctAnswers:0,
       consecutiveCorrectAnswers: 0,
       consecutiveIncorrectAnswers: 0,
       timer:1
     };
   }
+
 
   evaluateAnswer = (e) => {
     e.persist()
@@ -43,6 +45,7 @@ class Quiz extends Component{
         correctAnswers:_correctAnswers,
         consecutiveCorrectAnswers:_consecutiveCorrectAnswers
       });
+      this.props.setTurns(this.props.turn + 1);
     } else {
       e.target.style.color = 'red';
       const _incorrectAnswers = this.state.incorrectAnswers+ 1;
@@ -88,8 +91,10 @@ class Quiz extends Component{
 
   render(){
 
+
+
     return (
-      <div id = 'Question Container' style ={{width:"25vw", right:"0"}}>
+      <div id = 'Question Container' style ={{ width:"25vw", right:"0"}}>
         <Timer key = {this.state.timer} timer = {this.state.timer}/>
         <Paper elevation ={2} style ={{margin:"auto", marginTop:"0.5vh", height:"7.25vh"}}>
           <div style ={{textAlign:"center",fontWeight:"bold", fontSize:"1.75vh"}}>JavaScript Questions</div>
