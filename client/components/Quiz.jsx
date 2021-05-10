@@ -1,5 +1,6 @@
 import React, {Component, useState, useEffect }  from 'react';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import questions from '../assets/quizQuestions'
 import Timer from './Timer'
 
@@ -113,7 +114,8 @@ class Quiz extends Component{
             <button id = "D" style = {{marginTop:"0.25vh",width:"25vw",textAlign:"left",fontWeight:"bold", color:this.state.answerDTextColor}} onClick = {this.evaluateAnswer}>{String('D: '+this.state.quizQuestions[this.state.questionNumber]['D'])}</button>
           </div>
           <div>
-            <button style ={{marginTop:"1.25vh", marginLeft: "6.25vw", marginBottom: "1vh", width:"12.5vw"}} onClick = {this.generateNewQuestion}>Generate New Question</button>
+            {/* <button style ={{marginTop:"1.25vh", marginLeft: "6.25vw", marginBottom: "1vh", width:"12.5vw"}} onClick = {this.generateNewQuestion}>Generate New Question</button> */}
+            <Button variant="contained" color="secondary" style ={{marginTop:"1.25vh", marginLeft: "6.25vw", marginBottom: "1vh", width:"12.5vw"}} onClick = {this.generateNewQuestion}>Generate New Question</Button>
           </div>
         </Paper>
       </div>
