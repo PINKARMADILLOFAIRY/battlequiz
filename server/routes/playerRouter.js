@@ -12,7 +12,7 @@ router.get('/',
     sessionController.setCookie,
     sessionController.startSession,
     (req, res) => {
-        res.status(200).json({ssid: res.locals.ssid})
+        res.status(200).json({message: 'got to the end of the route'})
         // TODO res.redirect('/home');
     }
 );

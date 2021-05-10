@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 // import SaveIcon from '@material-ui/icons/Save';
 // import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Quiz from './Quiz.jsx';
+import Login from './Login.jsx';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Board from './Board.jsx'
 
 const useStyles = makeStyles((theme) => ({
@@ -24,20 +26,28 @@ export default function App() {
 
   return (
     <div className="App;" style = {{display:"flex",flexDirection:"row", justifyContent:"space-evenly"}}>
-      <Board turn={turn} decrementTurns={decrementTurns}/>
-      <div style = {{display:"flex",flexDirection:"column"}}>
-        <div className="Scoreboard">
-         <h1>Turns Remaining: <span>{turn}</span></h1>
-        </div>
-        <Button variant="contained" color="secondary">
-        Load
-      </Button>
-        <Button variant="contained" color="primary">
-        Save
-      </Button>
-      </div>
-      <Quiz turn={turn} setTurns = {setTurns}/>
-      {/* <Game /> */}
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Login></Login>
+          </Route>
+          <Route exact path="/game">
+            <Board turn={turn} decrementTurns={decrementTurns}/>
+            <div style = {{display:"flex",flexDirection:"column"}}>
+              <div className="Scoreboard">
+                Turns<span>{turn}</span>
+              </div>
+              <button>Save</button>
+              <button>Load</button>
+            </div>
+            <Quiz turn={turn} setTurns = {setTurns}/>
+            {/* <Game /> */}
+          </Route>
+          
+        </Switch>
+        
+      </BrowserRouter>
+      
     </div>
   );
 }
