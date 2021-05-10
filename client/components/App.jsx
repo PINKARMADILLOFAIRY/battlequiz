@@ -25,14 +25,15 @@ export default function App() {
   }
 
   return (
-    <div className="App;" style = {{display:"flex",flexDirection:"row", justifyContent:"space-evenly"}}>
+    <div>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             <Login></Login>
           </Route>
           <Route exact path="/game">
-            <Board turn={turn} decrementTurns={decrementTurns}/>
+            <div className="App;" style = {{display:"flex",flexDirection:"row", justifyContent:"space-evenly"}}>
+              <Board turn={turn} decrementTurns={decrementTurns}/>
             <div style = {{display:"flex",flexDirection:"column"}}>
               <div className="Scoreboard">
                 Turns<span>{turn}</span>
@@ -42,6 +43,8 @@ export default function App() {
             </div>
             <Quiz turn={turn} setTurns = {setTurns}/>
             {/* <Game /> */}
+            </div>
+            
           </Route>
           
         </Switch>
