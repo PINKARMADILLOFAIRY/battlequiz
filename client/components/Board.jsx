@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Box from './Box.jsx';
 import Ship from './Ship.jsx';
 
-export default function Board() {
+export default function Board(props) {
   // create player 1 board 10 x 10
   // each square can be empty or ship
   const [playerOneBoard, setPlayerOneBoard] = useState(
@@ -73,11 +73,14 @@ export default function Board() {
   const handleUpdateBoardTwo = (e) => {
     let x = e.target.id.slice(-2)[0]
     let y = e.target.id.slice(-1)[0]
+    if(props.turn === 0) return alert('You need to correclty answer a question to have a turn!')
     if (playerTwoBoard[x][y] === null) {
+      props.decrementTurns()
       return setPlayerTwoBoard(arr => [...arr, arr[x][y] = 'miss'])
     }
     // console.log(playerTwoBoard[x][y].slice(0,4)[0])
-      if (playerTwoBoard[x][y].slice(0,4) === 'ship' ) {
+    if (playerTwoBoard[x][y].slice(0,4) === 'ship' ) {
+        props.decrementTurns()
       return setPlayerTwoBoard(arr => [...arr, arr[x][y] = 'hit'])
     }
   }
