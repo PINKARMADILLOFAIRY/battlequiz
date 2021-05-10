@@ -13,6 +13,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // handle parsing request body
 app.use(express.json());
+app.use(express.urlencoded());
 app.use(cors());
 
 // routers

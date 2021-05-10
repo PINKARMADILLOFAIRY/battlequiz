@@ -1,38 +1,39 @@
-// this will handle the middleware for authenticating a user, saving/updating their games and stats
+// this will handle the middleware for authenticating a player, saving/updating their games and stats
 const { Player } = require('../models/gameModel');
 
 const playerController = {};
 
 playerController.createPlayer = (req, res, next) => {
-    // note the controller expects the newUser as an object in the body
+    // note the controller expects the newPlayer as an object in the body
     const newPlayer = req.body; 
-    // make sure there is a username and password on the body;
-    if (!newPlayer.password || !newPlayer.username) {
-        // did not have username and password
+    console.log(newPlayer);
+    // make sure there is a playerName and password on the body;
+    if (!newPlayer.password || !newPlayer.playerName) {
+        // did not have playerName and password
         return res.status(200).json({error: 'Could not login'});
     }
     // if the player already exists, do not create it, throw an error
-    Player.findOne({username: newUser.username})
-        .then(foundUser => {
-            if (foundUser) return next({message: 'user already exists'})
+    Player.findOne({playerName: newPlayer.playerName})
+        .then(foundPlayer => {
+            if (foundPlayer) return next({message: 'player already exists'})
         });
     // otherwise create a new player
     Player.create(newPlayer)
-        .then(createdUser => {
-            res.locals.ssid = user.id;
+        .then(createdPlayer => {
+            res.locals.ssid = createdPlayer.id;
             return next();
         })
-        .catch(err => next(err));
+        .catch(err => next({message: err.message}));
     }
 
 playerController.verifyPlayer = (req, res, next) => {
     const playerToVerify = req.body;
-    // missing password or username
-    if (!playerToVerify.password || !playerToVerify.username) {
+    // missing password or playerName
+    if (!playerToVerify.password || !playerToVerify.playerName) {
         console.log('missing required information');
         return next({message: 'missing required information'})
     }
-    Player.findOne({username: playerToVerify.username}, (err, returnedPlayer) => {
+    Player.findOne({playerName: playerToVerify.playerName}, (err, returnedPlayer) => {
         if (err) return next(err);
         if (!returnedPlayer) return next({message: 'player does not exist'});
         returnedPlayer.comparePassword(playerToVerify.password, function(err, isMatch) {
@@ -48,4 +49,4 @@ playerController.verifyPlayer = (req, res, next) => {
     });
 };
 
-export default playerController;
+module.exports = playerController;

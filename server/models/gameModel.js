@@ -19,7 +19,7 @@ playerSchema.pre('save', function(next) {
 });
 
 // compares hashed passwords for login
-userSchema.methods.comparePassword = function(passwordToTest, next) {
+playerSchema.methods.comparePassword = function(passwordToTest, next) {
   bcrypt.compare(passwordToTest, this.password, function(err, isMatch) {
     if (err) return next(err);
     next(null, isMatch); 
