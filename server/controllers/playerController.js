@@ -6,10 +6,10 @@ const Player = require('../models/playerModel');
 
 const playerController = {};
 
+// POST requests handle saving a new player to the database with password bcrypted
 playerController.createPlayer = (req, res, next) => {
     // note the controller expects the newPlayer as an object in the body
     const newPlayer = req.body; 
-    console.log(newPlayer);
     // make sure there is a playerName and password on the body;
     if (!newPlayer.password || !newPlayer.playerName) {
         // did not have playerName and password
@@ -29,6 +29,7 @@ playerController.createPlayer = (req, res, next) => {
         .catch(err => next({message: err.message}));
     }
 
+// GET requests check for the existence of a player by playerName and then verify the password using bcrypt
 playerController.verifyPlayer = (req, res, next) => {
     const playerToVerify = req.body;
     // missing password or playerName

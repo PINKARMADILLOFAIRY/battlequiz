@@ -2,11 +2,13 @@
 controller sets cookies and handles JWT sessions
 */ 
 const Session = require('../models/sessionModel');
+const JWT = require('jsonwebtoken');
 
 const sessionController = {};
 
 // signs and sets JWT as a cookie to verify the session
 sessionController.setCookie = (req, res, next) => {
+    console.log('entered setCookie with: ', res.locals.ssid);
     // create payload for JWT containing {ssid, username iat
     const payload = {
         // ssid and playerName should still be on res.locals from logging in
@@ -17,7 +19,9 @@ sessionController.setCookie = (req, res, next) => {
 
     // need to add environment variable for JWT_SECRET
     const signature = JWT.sign(payload, process.env.JWT_SECRET, {expiresIn: 1000 * 60 * 60});
+    console.log('jwt signature: ', signature);
     res.cookie('battlequiz', signature, {httpOnly: true});
+    console.log('res.cookies', res.cookies);
     next();
 }
 
