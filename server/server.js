@@ -20,7 +20,10 @@ app.use('/games', gamesRouter);
 // static router from the build folder
 app.use('/build', express.static(path.join(__dirname, '../build/bundle.js')));
 
+<<<<<<< HEAD
+=======
 // base route otherwise serves index
+>>>>>>> 71b2c84f6da5017420daf82737f4e5833ba3a1da
 app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../index.html')));
 
 // catch-all 404 route handler
