@@ -35,10 +35,14 @@ export default function App() {
             <Board turn={turn} decrementTurns={decrementTurns}/>
             <div style = {{display:"flex",flexDirection:"column"}}>
               <div className="Scoreboard">
-                Turns<span>{turn}</span>
+                <h1>Turns Remaining: <span>{turn}</span></h1>
               </div>
-              <button>Save</button>
-              <button>Load</button>
+        <Button variant="contained" color="secondary">
+        Load
+      </Button>
+        <Button variant="contained" color="primary">
+        Save
+      </Button>
             </div>
             <Quiz turn={turn} setTurns = {setTurns}/>
             {/* <Game /> */}
