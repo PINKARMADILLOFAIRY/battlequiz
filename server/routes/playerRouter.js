@@ -1,3 +1,19 @@
 // this file will eventually handle the request routing to log in, sign up, and handle player state during games
-// for now, I'm going to leave this alone as the login stuff is a stretch goal
 
+const express = require('express'); 
+const playerController = require('../controllers/playerController');
+const router = express.Router();
+
+router.get('/',
+    playerController.verifyPlayer,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+router.post('/', 
+    playerController.createPlayer,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const gamesRouter = require('./routes/gamesRouter');
+const playerRouter = require('./routes/playerRouter');
 require('dotenv').config();
 
 const app = express();
@@ -16,11 +17,13 @@ app.use(cors());
 
 // routers
 app.use('/games', gamesRouter);
+app.use('/player', playerRouter);
 
 // static router from the build folder
 app.use('/build', express.static(path.join(__dirname, '../build/bundle.js')));
 
 // base route otherwise serves index
+// TODO add homepage and login page for redirects
 app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../index.html')));
 
 // catch-all 404 route handler
