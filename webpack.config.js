@@ -18,7 +18,12 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react'],
                     }
                 }
-            }
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                exclude: /node_modules/,
+                use: ['style-loader', 'css-loader', 'sass-loader',],
+            },
         ]
     },
     devServer: {
@@ -26,6 +31,7 @@ module.exports = {
         publicPath: '/build',
         proxy: {
             '/games/**': 'http://localhost:3000',
+            '/players/**': 'http://localhost:3000',
         },
         hot: true,
     }
