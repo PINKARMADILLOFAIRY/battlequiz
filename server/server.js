@@ -24,7 +24,10 @@ app.use('/player', playerRouter);
 app.use('/build', express.static(path.join(__dirname, '../build/bundle.js')));
 
 // base route otherwise serves index
+<<<<<<< HEAD
+=======
 // TODO add homepage and login page for redirects
+>>>>>>> develop
 app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../index.html')));
 
 // catch-all 404 route handler
