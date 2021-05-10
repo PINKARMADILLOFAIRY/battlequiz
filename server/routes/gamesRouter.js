@@ -1,7 +1,7 @@
 // this file will handle routing requests for saving game state to the database
 
 const express = require('express'); 
-const gamesController = require('../controllers/gamesController');
+const gamesController = require('../controllers/gameController');
 const router = express.Router(); 
 
 // GET request for loading a game by ID

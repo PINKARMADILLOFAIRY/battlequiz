@@ -1,5 +1,8 @@
-// this will handle the middleware for authenticating a player, saving/updating their games and stats
-const { Player } = require('../models/gameModel');
+/* 
+handles the logic for creating and verifying a player's username/password
+*/ 
+
+const Player = require('../models/playerModel');
 
 const playerController = {};
 

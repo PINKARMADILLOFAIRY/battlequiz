@@ -1,10 +1,10 @@
 // this file contains middleware for CRUD functionality on game state
 
-const { Game } = require('../models/gameModel'); // make sure this path is correct
+const Game = require('../models/gameModel'); // make sure this path is correct
 
-const gamesController = {};
+const gameController = {};
 
-gamesController.createGame = (req, res, next) => {
+gameController.createGame = (req, res, next) => {
     // NOTE: createGame expects req.body to BE the game object we are saving
     Game.create(req.body) 
         .then(queryResponse => {
@@ -18,7 +18,7 @@ gamesController.createGame = (req, res, next) => {
         })
 };
 
-gamesController.findGame = (req, res, next) => {
+gameController.findGame = (req, res, next) => {
     // expects :id/<mongoIDnumber> in the route
     // TODO we could potentially allow players to "name" their game or identify them by something else, like date created
     const queryFilter = {_id: req.params.id}
@@ -33,7 +33,7 @@ gamesController.findGame = (req, res, next) => {
         })
 };
 
-gamesController.updateGame = (req, res, next) => {
+gameController.updateGame = (req, res, next) => {
     Game.findOneAndUpdate({_id: req.params.id}, req.body, {returnOriginal: false}) // ! check on this one
         .then(queryResponse => {
             // should return NEW updated game object to confirm
@@ -46,7 +46,7 @@ gamesController.updateGame = (req, res, next) => {
         })
 };
 
-gamesController.deleteGame = (req, res, next) => {
+gameController.deleteGame = (req, res, next) => {
     Game.findOneAndDelete({_id: req.params.id})
         .then(queryResponse => {
             res.locals.games = queryResponse;
@@ -58,4 +58,4 @@ gamesController.deleteGame = (req, res, next) => {
         })
 };
 
-module.exports = gamesController;
+module.exports = gameController;
